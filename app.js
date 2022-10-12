@@ -26,10 +26,12 @@ try {
   app.use(Cors({ origin: "*" }));
 
   const userRoute = require("./routes/users_routers");
-  // const loginRoute = require("./routes/login_routers");
+  const loginRoute = require("./routes/login_routers");
+  const jobRoute = require("./routes/job_routers");
 
   app.use("/api/dmp/user", userRoute);
-  // app.use("/api/dmp/login", loginRoute);
+  app.use("/api/dmp/login", loginRoute);
+  app.use("/api/dmp/job", jobRoute);
 
   const sequelize = new Sequelize("dansmultipro", "postgres", "12345678", {
     host: "localhost",
