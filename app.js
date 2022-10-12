@@ -26,8 +26,10 @@ try {
   app.use(Cors({ origin: "*" }));
 
   const userRoute = require("./routes/users_routers");
+  // const loginRoute = require("./routes/login_routers");
 
   app.use("/api/dmp/user", userRoute);
+  // app.use("/api/dmp/login", loginRoute);
 
   const sequelize = new Sequelize("dansmultipro", "postgres", "12345678", {
     host: "localhost",

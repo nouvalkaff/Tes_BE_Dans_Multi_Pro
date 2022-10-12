@@ -1,6 +1,43 @@
-const { Op } = require("sequelize");
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const USER_EXIST = await User.findOne({
+      where: { id },
+      attributes: { exclude: "password" },
+    });
+
+    if (!USER_EXIST) {
+      return res.status(404).json({
+        code: 404,
+        statustext: "Not Found",
+        success: false,
+        message: "User data is not found in database",
+      });
+    }
+
+    await User.destroy({ where: { id } });
+
+    return res.status(200).json({
+      code: 200,
+      statusText: "OK",
+      success: true,
+      message: "Delete a data success",
+      result: USER_EXIST,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      code: 500,
+      statusText: "Internal Server Error",
+      success: false,
+      message: "Cannot get data",
+    });
+  }
+};
 
 exports.updateUser = async (req, res) => {
   try {
@@ -39,6 +76,15 @@ exports.updateUser = async (req, res) => {
     if (username) queryUpdate.username = username;
     if (password) queryUpdate.password = bcrypt.hashSync(String(password), 12);
 
+    if (!password) {
+      return res.status(409).json({
+        code: 409,
+        statustext: "Conflict",
+        success: false,
+        message: "Password cannot be empty",
+      });
+    }
+
     const UPDATE_DATA = await User.update(queryUpdate, { where: { id } });
 
     if (UPDATE_DATA) {
@@ -51,7 +97,7 @@ exports.updateUser = async (req, res) => {
         code: 200,
         statusText: "OK",
         success: true,
-        message: "Get a data success",
+        message: "Update a data success",
         result: USER,
       });
     }
