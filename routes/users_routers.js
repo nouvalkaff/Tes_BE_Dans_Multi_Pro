@@ -4,9 +4,9 @@ const router = express.Router();
 
 const user = require("../controllers/user_controllers");
 
-// router.get("/userPayment/getAll", user.getAllUserPayment);
+router.get("/getall", user.getAllUser);
 
-// router.get("/userPayment", user.getUserPaymentById);
+router.get("/id/:id", user.getUserById);
 
 router.post("/create", user.createUser);
 
