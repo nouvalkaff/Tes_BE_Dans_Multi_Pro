@@ -1,0 +1,20 @@
+{
+  "name": "Tes_BE_Dans_Multi_Pro",
+  "version": "1.0.0",
+  "description": "READ ME",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nouvalkaff/Tes_BE_Dans_Multi_Pro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nouvalkaff/Tes_BE_Dans_Multi_Pro/issues"
+  },
+  "homepage": "https://github.com/nouvalkaff/Tes_BE_Dans_Multi_Pro#readme"
+}
