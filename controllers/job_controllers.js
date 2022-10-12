@@ -7,7 +7,9 @@ exports.getAll = async (req, res) => {
     let fetchResult = (await axios.get(URL)).data;
     let responseResult = [];
 
-    const { description, location, full_time } = JSON.parse(req.query.query);
+    const { description, location, full_time, limit, page } = JSON.parse(
+      req.query.query
+    );
 
     let searchQuery = {};
 
@@ -93,6 +95,10 @@ exports.getAll = async (req, res) => {
         if (type !== "Full Time") responseResult.push(EACH_DATA);
       }
     }
+
+    const skip = (+page - 1) * +limit;
+
+    responseResult = responseResult.slice(skip, page * limit);
 
     return res.status(200).json({
       code: 200,
