@@ -1,30 +1,22 @@
 const http = require("http");
+const axios = require("axios");
 
-exports.test = async (req, res) => {
+exports.getAll = async (req, res) => {
   try {
-    let fetchResult;
+    const URL = "http://dev3.dansmultipro.co.id/api/recruitment/positions.json";
+    let fetchResult = await axios.get(URL);
 
-    http
-      .get(
-        "http://dev3.dansmultipro.co.id/api/recruitment/positions.json",
-        (res) => {
-          let data = [];
+    fetchResult = fetchResult.data;
 
-          res.on("data", (chunk) => {
-            data.push(chunk);
-          });
+    console.log(fetchResult);
 
-          res.on("end", () => {
-            console.log("Response ended: ");
-            const job = JSON.parse(Buffer.concat(data).toString());
-
-            fetchResult = job;
-          });
-        }
-      )
-      .on("error", (err) => {
-        console.log("Error: ", err.message);
-      });
+    return res.status(200).json({
+      code: 200,
+      statusText: "OK",
+      success: true,
+      message: "Get all data success",
+      result: fetchResult,
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).send({

@@ -6,6 +6,6 @@ const job = require("../controllers/job_controllers");
 
 const { isUser } = require("../middleware/authorization");
 
-router.post("/tes", isUser, job.test);
+router.post("/getall", isUser, job.getAll);
 
 module.exports = router;
