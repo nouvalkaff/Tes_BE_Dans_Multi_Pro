@@ -10,7 +10,7 @@ router.get("/id/:id", user.getUserById);
 
 router.post("/create", user.createUser);
 
-// router.put("/userPayment/upd", user.updateUserPayment);
+router.patch("/update/:id", user.updateUser);
 
 // router.delete("/userPayment/del", user.deleteUserPayment);
 
