@@ -33,10 +33,15 @@ try {
   app.use("/api/dmp/login", loginRoute);
   app.use("/api/dmp/job", jobRoute);
 
-  const sequelize = new Sequelize("dansmultipro", "postgres", "12345678", {
-    host: "localhost",
-    dialect: "postgres",
-  });
+  const sequelize = new Sequelize(
+    "dmordzjy",
+    "dmordzjy",
+    "U7ls8bzkxxEqnJSKYKca59E4-RSQ0cZv",
+    {
+      host: "rosie.db.elephantsql.com",
+      dialect: "postgres",
+    }
+  );
 
   // Declare a function to check API is online or offline
   app.all("*", (req, res) => {

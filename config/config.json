@@ -7,10 +7,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "12345678",
-    "database": "dansmultipro",
-    "host": "127.0.0.1",
+    "username": "dmordzjy",
+    "password": "U7ls8bzkxxEqnJSKYKca59E4-RSQ0cZv",
+    "database": "dmordzjy",
+    "host": "rosie.db.elephantsql.com",
     "dialect": "postgres"
   }
 }
