@@ -1,6 +1,31 @@
 const http = require("http");
 const axios = require("axios");
 
+exports.getByID = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const URL = `http://dev3.dansmultipro.co.id/api/recruitment/positions/${id}`;
+    let fetchResult = (await axios.get(URL)).data;
+
+    return res.status(200).json({
+      code: 200,
+      statusText: "OK",
+      success: true,
+      message: "Get a data success",
+      total: fetchResult.length,
+      result: fetchResult,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      code: 500,
+      statusText: "Internal Server Error",
+      success: false,
+      message: "Cannot get data",
+    });
+  }
+};
+
 exports.getAll = async (req, res) => {
   try {
     const URL = "http://dev3.dansmultipro.co.id/api/recruitment/positions.json";
