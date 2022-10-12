@@ -34,13 +34,12 @@ exports.updateUser = async (req, res) => {
       });
     }
 
-    const UPDATE_DATA = await User.update(
-      {
-        username: String(username),
-        // password: previousData.dataValues.password,
-      },
-      { where: { id } }
-    );
+    let queryUpdate = {};
+
+    if (username) queryUpdate.username = username;
+    if (password) queryUpdate.password = bcrypt.hashSync(String(password), 12);
+
+    const UPDATE_DATA = await User.update(queryUpdate, { where: { id } });
 
     if (UPDATE_DATA) {
       const USER = await User.findOne({
