@@ -3,14 +3,14 @@
     "username": "postgres",
     "password": "12345678",
     "database": "dansmultipro",
-    "host": "localhost",
+    "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "12345678",
     "database": "dansmultipro",
-    "host": "localhost",
+    "host": "127.0.0.1",
     "dialect": "postgres"
   }
 }

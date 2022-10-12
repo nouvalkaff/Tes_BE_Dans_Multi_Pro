@@ -10,7 +10,11 @@ try {
   require("dotenv").config();
 
   // Declare app variable to allow in creating other essential functions
+  const PORT = process.env.PORT;
   const app = Express();
+
+  app.use(Express.json());
+  app.use(Express.urlencoded({ extended: false }));
 
   /**
    * Enable CORS
@@ -19,7 +23,11 @@ try {
    * to indicate any origins (domain, scheme, or port)
    * other than its own from which a browser should permit loading resources.
    */
-  app.use(Cors());
+  app.use(Cors({ origin: "*" }));
+
+  const userRoute = require("./routes/users_routers");
+
+  app.use("/api/dmp/user", userRoute);
 
   const sequelize = new Sequelize("dansmultipro", "postgres", "12345678", {
     host: "localhost",
@@ -27,12 +35,17 @@ try {
   });
 
   // Declare a function to check API is online or offline
-  app.all("*", (req, res) =>
-    res.send("<h1>API is online. Please specify your URL again.</h1>")
-  );
+  app.all("*", (req, res) => {
+    return res.status(200).send({
+      code: 200,
+      statustext: "OK",
+      success: true,
+      message:
+        "Welcome to API test for PT Dans Multi Pro by Mohamad Nouval Abdel Alkaf",
+    });
+  });
 
-  const PORT = process.env.PORT;
-
+  // Listening port to start the server and connect to database
   app.listen(PORT, async () => {
     try {
       console.log("Server start on PORT " + PORT);
